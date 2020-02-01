@@ -55,7 +55,14 @@ class MicroBitUARTService
 
     uint8_t txBufferSize;
 
-    uint32_t rxCharacteristicHandle;
+    // Characteristic table need to have life time of the class
+    // should have same layout as an array.
+    struct {
+      GattCharacteristic* rxCharacteristic;
+      GattCharacteristic* txCharacteristic;
+    } charTable;
+
+    uint32_t txCharacteristicHandle;
 
     // Bluetooth stack we're running on.
     BLEDevice           &ble;
